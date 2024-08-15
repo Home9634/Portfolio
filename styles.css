@@ -1,0 +1,64 @@
+html {
+    scroll-padding-top: 5rem;
+}
+
+.page-fold {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 30px solid #f0f0f0;
+    /* Light mode fold color */
+    border-left: 30px solid transparent;
+    transition: border-top-color 0.3s ease;
+}
+
+.dark .page-fold {
+    border-top-color: #2d3748;
+    /* Dark mode fold color */
+}
+
+.bookmark a {
+    position: relative;
+    border-radius: 0 0 5px 5px;
+}
+
+.bookmark a::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: inherit;
+    border-radius: 5px 5px 0 0;
+}
+
+#skills-container {
+    background: repeating-linear-gradient(45deg,
+            #f0f0f0,
+            #f0f0f0 10px,
+            #e0e0e0 10px,
+            #e0e0e0 20px);
+}
+
+.dark #skills-container {
+    background: repeating-linear-gradient(45deg,
+            #2d3748,
+            #2d3748 10px,
+            #1a202c 10px,
+            #1a202c 20px);
+}
+
+.skill-card {
+    cursor: move;
+    user-select: none;
+    touch-action: none;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.skill-card:hover {
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}

@@ -9,20 +9,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-    <style>
-        html {
-            scroll-padding-top: 5rem;
-        }
-        .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .dark .gradient-text {
-            background: linear-gradient(90deg, #60a5fa, #a78bfa);
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <link href="styles.css" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -35,25 +23,57 @@
                     textColor: {
                         'dark-text': '#e2e8f0',
                     },
+                    fontFamily: {
+                        serif: ['Merriweather', 'Georgia', 'serif'],
+                    },
+                    colors: {
+                        ink: {
+                            light: '#394B59',
+                            DEFAULT: '#1F2937',
+                            dark: '#111827',
+                        },
+                        parchment: {
+                            light: '#F5F5DC',
+                            DEFAULT: '#F3E5AB',
+                            dark: '#E8D28A',
+                        },
+                    }
                 },
+
             },
         }
     </script>
 </head>
 
 <body class="min-h-screen dark:bg-gray-900 bg-gray-200">
+    <div id="particles-js"></div>
+
     <header
         class="bg-gray-300 dark:bg-dark-card bg-opacity-90 text-gray-800 dark:text-dark-text py-4 fixed w-full z-10 shadow-md transition-colors duration-300">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <h1 class="text-3xl font-bold">Syed Abdul Rahman Aljoofre</h1>
             <nav class="flex items-center">
                 <ul class="flex space-x-4 mr-4">
-                    <li><a href="#about" class="hover:text-blue-600 transition duration-300">About</a></li>
-                    <li><a href="#skills" class="hover:text-blue-600 transition duration-300">Skills</a></li>
-                    <li><a href="#projects" class="hover:text-blue-600 transition duration-300">Projects</a></li>
-                    <li><a href="#achievements" class="hover:text-blue-600 transition duration-300">Achievements</a>
+                    <li class="bookmark">
+                        <a href="#about"
+                            class="px-4 py-2 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300">About</a>
                     </li>
-                    <li><a href="#contact" class="hover:text-blue-600 transition duration-300">Contact</a></li>
+                    <li class="bookmark">
+                        <a href="#skills"
+                            class="px-4 py-2 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300">Skills</a>
+                    </li>
+                    <li class="bookmark">
+                        <a href="#projects"
+                            class="px-4 py-2 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300">Projects</a>
+                    </li>
+                    <li class="bookmark">
+                        <a href="#achievements"
+                            class="px-4 py-2 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300">Achievements</a>
+                    </li>
+                    <li class="bookmark">
+                        <a href="#contact"
+                            class="px-4 py-2 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300">Contact</a>
+                    </li>
                 </ul>
                 <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
                     <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
@@ -63,12 +83,15 @@
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-8 pt-24">
+    <main class="container mx-auto px-4 py-8 pt-24 mb-12">
         <section id="about" class="mb-12">
-            <h2 class="text-3xl font-bold my-4 text-blue-600 dark:text-blue-100">About Me</h2>
+            <h2
+                class="text-3xl font-bold font-serif my-4 text-blue-600 dark:text-blue-100">
+                About Me</h2>
             <div class="bg-gray-100 dark:bg-gray-600 dark:text-white text-lg p-6 rounded shadow-lg">
                 <p class="mb-4">I'm a student pursuing a Diploma in Applied Artificial Intelligence at Temasek
-                    Polytechnic, as well as a WorldSkills WebTech trainee. With a strong foundation in programming, data analysis, and machine learning, I'm
+                    Polytechnic, as well as a WorldSkills WebTech trainee. With a strong foundation in programming, data
+                    analysis, and machine learning, I'm
                     passionate about creating innovative solutions using technology. I enjoy learning new things,
                     figuring out solutions to challenges, and working with others.</p>
                 <p class="mb-4">Beyond my tech pursuits, I'm also an aspiring author. Under the pen name Fern Scribbler,
@@ -83,14 +106,16 @@
         </section>
 
         <section id="skills" class="mb-12">
-            <h2 class="text-3xl font-bold mb-4 text-blue-600 dark:text-blue-100">Skills</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="skills-grid">
-                <!-- Skills will be dynamically added here -->
+            <h2 class="text-3xl font-serif font-bold mb-4 text-blue-600 dark:text-blue-100">Skills Board</h2>
+            <div id="skills-container" class="relative h-[400px] overflow-hidden border border-gray-300 dark:border-gray-700 rounded-lg">
+                <div id="skills-grid" class="absolute inset-0">
+                    <!-- Skills will be dynamically added here -->
+                </div>
             </div>
         </section>
 
         <section id="projects" class="mb-12">
-            <h2 class="text-3xl font-bold mb-4 text-blue-600 dark:text-blue-100">Projects</h2>
+            <h2 class="text-3xl font-serif font-bold mb-4 text-blue-600 dark:text-blue-100">Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
                 <!-- Projects will be dynamically added here -->
             </div>
@@ -108,16 +133,19 @@
         </section> -->
 
         <section id="contact" class="mb-12">
-            <h2 class="text-3xl font-bold mb-4 dark:text-white">Contact Me</h2>
-            <p class="mb-4 dark:text-white">Feel free to reach out to me for collaborations, opportunities, or if you have any questions
+            <h2 class="text-3xl font-bold font-serif mb-4 dark:text-white">Contact Me</h2>
+            <p class="mb-4 dark:text-white">Feel free to reach out to me for collaborations, opportunities, or if you
+                have any questions
                 about my work!</p>
             <ul class="space-y-2 dark:text-white">
-                <li><i class="fas fa-envelope mr-2 text-blue-600 dark:text-blue-100"></i>Email: <a href="mailto:syedaljoofre04@gmail.com" target="_blank"
+                <li><i class="fas fa-envelope mr-2 text-blue-600 dark:text-blue-100"></i>Email: <a
+                        href="mailto:syedaljoofre04@gmail.com" target="_blank"
                         class="text-blue-600 dark:text-blue-100 hover:underline">syedaljoofre04@gmail.com</a></li>
                 <li><i class="fab fa-linkedin mr-2 text-blue-600 dark:text-blue-100"></i>LinkedIn: <a
                         href="https://www.linkedin.com/in/syed-abdul-rahman-aljoofre-0ba84b281/" target="_blank"
                         class="text-blue-600 dark:text-blue-100 hover:underline">Syed Abdul Rahman Aljoofre</a></li>
-                <li><i class="fab fa-github mr-2 text-blue-600 dark:text-blue-100"></i>GitHub: <a href="https://github.com/Home9634" target="_blank"
+                <li><i class="fab fa-github mr-2 text-blue-600 dark:text-blue-100"></i>GitHub: <a
+                        href="https://github.com/Home9634" target="_blank"
                         class="text-blue-600 dark:text-blue-100 hover:underline">Home9634</a></li>
             </ul>
         </section>

@@ -21,10 +21,17 @@ const projects = [
     {
         title: "Firebush",
         description: "A text simulator game heavily inspired by the Hunger Games simulator",
-        images: [""],
-        pills: [{"Documentation": "https://docs.google.com/document/d/1-8Rg-ao-9Is_LP5zyR1SsS1AW8tpuJoa6uS9OHLfkSk/edit"}, {"Link": "https://firebush.netlify.app/"}],
+        images: ["https://i.ibb.co/QJPGBKH/image.png", "https://i.ibb.co/DWV7Tyz/image.png", "https://i.ibb.co/vjvvmRc/image.png",],
+        pills: [{ "Documentation": "https://docs.google.com/document/d/1-8Rg-ao-9Is_LP5zyR1SsS1AW8tpuJoa6uS9OHLfkSk/edit" }, { "Link": "https://firebush.netlify.app/" }],
         technologies: ["HTML", "CSS", "JavaScript", "Tailwind"]
 
+    },
+    {
+        title: "Fern Scribbler Wiki",
+        description: "A wiki built using React and Tailwind, hosted on Github Pages. It consists of every book and character in my other area of interest, which is writing.",
+        images: [],
+        pills: [{ "Link": "https://home9634.github.io/Fern-Scribbler-Wiki/#/" }],
+        technologies: ["HTML", "CSS", "JavaScript", "React", "Tailwind"],
     },
     {
         title: "Image Seer",
@@ -41,16 +48,30 @@ const projects = [
         github: "#",
         demo: "#",
         technologies: ["Flutter", "Dart", "LTA API", "Firebase"]
-    }
+    },
+    {
+        title: "Sleep Disorder Detector",
+        description: "For Machine Learning For Developers module, I cleaned a dataset and trained a model using scikit-learn, in order to predict different sleep disorders.",
+        images: [],
+        github: "https://github.com/Home9634/sleep-detection-app-mldp",
+        pills: [{ "Link": "https://blank-app-e829zcaidsg.streamlit.app/" }],
+        technologies: ["Streamlit", "Python", "scikit-learn"],
+    },
     // Add more projects here
 ];
 
 // Component for skill card
-function createSkillCard(skill) {
+function createSkillCard(skill, index) {
+    console.log(Math.floor(index / 2))
+    let x = Math.floor(index / 2) * 200
+    let y = index % 2 == 0 ? 0 : 150
     return `
-        <div class="bg-gray-100 dark:bg-gray-600 dark:text-white p-4 rounded shadow-lg transform hover:scale-105 transition duration-300 hover:bg-blue-50 dark:hover:bg-gray-700">
-            <h3 class="font-bold mb-2 text-blue-600 dark:text-blue-100">${skill.title}</h3>
-            <p>${skill.content}</p>
+        <div class="skill-card absolute w-[200px] h-[200px] bg-gray-100 dark:bg-gray-600 dark:text-white rounded shadow-lg overflow-hidden" style="transform:translate(${x}px, ${y}px)" data-x="${x}" data-y="${y}">
+            <div class="bg-gray-200 dark:bg-gray-700 h-6"></div>
+            <div class="p-2">
+                <h3 class="font-bold mb-1 text-lg text-gray-800 dark:text-gray-200">${skill.title}</h3>
+                <p class="text-md text-gray-700 dark:text-gray-300">${skill.content}</p>
+            </div>
         </div>
     `;
 }
@@ -82,10 +103,12 @@ function createProjectCard(project, index) {
             <div class="flex space-x-2">
                 ${project.github ? `<a href="${project.github}" class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-600 transition duration-300 transform hover:scale-105" target="_blank">GitHub</a>` : ""}
                 ${project.demo ? `<a href="${project.demo}" class="bg-green-500 text-white px-3 py-1 rounded-full text-sm hover:bg-green-600 transition duration-300 transform hover:scale-105" target="_blank">Demo</a>` : ""}
-                ${project.pills ? project.pills.map(pill => {
-                    console.log(Object.keys(pill))
-                    return `<a href="${Object.values(pill)[0]}" class="bg-stone-500 text-white px-3 py-1 rounded-full text-sm hover:bg-stone-600 transition duration-300 transform hover:scale-105" target="_blank">${Object.keys(pill)[0]} </a>`}) : ""}
+                ${project.pills ? `${project.pills.map(pill => {
+        console.log(Object.keys(pill))
+        return `<a href="${Object.values(pill)[0]}" class="bg-stone-500 text-white px-3 py-1 rounded-full text-sm hover:bg-stone-600 transition duration-300 transform hover:scale-105" target="_blank">${Object.keys(pill)[0]} </a>`
+    })}`.replaceAll(",", "") : ""}
             </div>
+                        <div class="page-fold"></div>
         </div>
     `;
 }
@@ -148,6 +171,8 @@ closeViewer.addEventListener('click', () => {
     imageViewer.classList.add('hidden');
 });
 
+window.scrollTo(0, 0)
+
 // Theme toggle
 const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
@@ -165,6 +190,66 @@ if (localStorage.getItem('theme') === 'light') {
     html.classList.add('dark');
 }
 
+let highestZIndex = 100; // Global counter to keep track of the highest z-index
+
+function initDraggable() {
+    let skillCards = document.querySelectorAll('.skill-card');
+
+    skillCards.forEach((card) => {
+        interact(card).draggable({
+            inertia: true,
+            modifiers: [
+                interact.modifiers.restrictRect({
+                    restriction: 'parent',
+                    endOnly: true
+                })
+            ],
+            listeners: {
+                start(event) {
+                    // Bring the dragged element to the front
+                    highestZIndex++
+                    event.target.style.zIndex = highestZIndex;
+                    // skillCards.forEach((tempCard) => {
+                    //     console.log("tree")
+                    //     if (tempCard != card) {
+                    //         tempCard.style.zIndex = ''
+                    //     }
+                    // })
+                },
+                move: dragMoveListener,
+                end(event) {
+                    // Optionally reset the z-index after dragging ends
+                    // event.target.style.zIndex = '';
+                }
+            }
+        });
+
+        card.addEventListener('click', () => {
+            highestZIndex++; // Increment the highest z-index
+            card.style.zIndex = highestZIndex; // Bring the clicked element to the front
+        });
+    });
+}
+
+function dragMoveListener(event) {
+    const target = event.target;
+    const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+    const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    target.style.transform = `translate(${x}px, ${y}px)`;
+
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+}
+
+
+// Use requestAnimationFrame to ensure the DOM has updated before initializing
+requestAnimationFrame(() => {
+    initDraggable();
+});
+
+// Recalculate positions on window resize
+window.addEventListener('resize', initDraggable);
 
 // GSAP animations
 gsap.registerPlugin(ScrollTrigger);
