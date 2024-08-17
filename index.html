@@ -79,6 +79,9 @@
                     <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
                     <i class="fas fa-moon text-blue-300 hidden dark:inline"></i>
                 </button>
+                <button id="achievements-button" class="ml-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                    <i class="fas fa-trophy text-yellow-500"></i>
+                </button>
             </nav>
         </div>
     </header>
@@ -135,8 +138,7 @@
         <section id="contact" class="mb-12">
             <h2 class="text-3xl font-bold font-serif mb-4 dark:text-white">Contact Me</h2>
             <p class="mb-4 dark:text-white">Feel free to reach out to me for collaborations, opportunities, or if you
-                have any questions
-                about my work!</p>
+                have any questions about my work!</p>
             <ul class="space-y-2 dark:text-white">
                 <li><i class="fas fa-envelope mr-2 text-blue-600 dark:text-blue-100"></i>Email: <a
                         href="mailto:syedaljoofre04@gmail.com" target="_blank"
@@ -151,6 +153,21 @@
         </section>
     </main>
 
+    <div id="achievements-menu" class="fixed top-0 right-0 h-full bg-white dark:bg-gray-800 shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
+        <div class="p-4">
+            <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-blue-100">Achievements</h2>
+            <div id="achievements-list">
+                <!-- Achievements will be dynamically added here -->
+            </div>
+        </div>
+        <div class="text-center">
+            <button id="achievements-menu-reset" class="w-2/3 text-center rounded py-2 bg-red-600 dark:bg-red-700 hover:bg-red-700 hover:dark:bg-red-800 dark:text-gray-300">Reset Achievements</button>
+        </div>
+        <button id="achievements-menu-close" class="fixed top-5 right-6 text-lg">
+            <i class="fa-solid fa-x text-red-500"></i>
+        </button>
+    </div>
+
     <div id="image-viewer" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center">
         <div class="h-[80%] w-[80%] text-center m-auto items-center flex justify-center">
             <h1 id="full-image-project" class="text-3xl absolute top-4 left-4 text-white font-bold"></h1>
@@ -159,7 +176,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>

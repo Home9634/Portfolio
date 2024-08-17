@@ -62,3 +62,45 @@ html {
 .skill-card:hover {
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
+
+#achievements-menu {
+    z-index: 1000;
+}
+
+.achievement {
+    background-color: #f3f4f6;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    background-color: #fef3c7;
+    transition: right 0.5s ease;
+}
+
+.achievement.unlocked::before {
+    right: 0;
+}
+
+.achievement > * {
+    position: relative;
+    z-index: 1;
+}
+
+.dark .achievement {
+    background-color: #374151;
+}
+
+.dark .achievement::before {
+    background-color: #92400e;
+}

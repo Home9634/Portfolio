@@ -14,13 +14,14 @@ const projects = [
     {
         title: "Scribble",
         description: "My first programming project since 2022, a Discord bot hosted locally on my computer. It is an economy and games bot developed using Discord.js. It is also a chatbot, utilising the Gemini API to get the Gen AI responses.",
+        category: "",
         images: ["https://i.ibb.co/2tDTqHk/Screenshot-2024-08-14-154847.png"],
         pills: [{ "Documentation": "https://docs.google.com/document/d/13N9N90cFbXuCKMIRICWNKWG_RK3YyzskSpFyX7O00gg/edit" }],
         technologies: ["NodeJS", "Gemini API", "MongoDB"]
     },
     {
         title: "Firebush",
-        description: "A text simulator game heavily inspired by the Hunger Games simulator",
+        description: "A text simulator game heavily inspired by the Hunger Games simulator.",
         images: ["https://i.ibb.co/QJPGBKH/image.png", "https://i.ibb.co/DWV7Tyz/image.png", "https://i.ibb.co/vjvvmRc/image.png",],
         pills: [{ "Documentation": "https://docs.google.com/document/d/1-8Rg-ao-9Is_LP5zyR1SsS1AW8tpuJoa6uS9OHLfkSk/edit" }, { "Link": "https://firebush.netlify.app/" }],
         technologies: ["HTML", "CSS", "JavaScript", "Tailwind"]
@@ -28,8 +29,8 @@ const projects = [
     },
     {
         title: "Fern Scribbler Wiki",
-        description: "A wiki built using React and Tailwind, hosted on Github Pages. It consists of every book and character in my other area of interest, which is writing.",
-        images: [],
+        description: "A wiki built using React and Tailwind, hosted on Github Pages. It consists of every book and character in several book series under my pen name, Fern Scribbler.",
+        images: ["https://i.ibb.co/t3gBcQB/image.png", "https://i.ibb.co/PxPSD2B/image.png", "https://i.ibb.co/cyRSRP1/image.png", "https://i.ibb.co/XFbgt0Z/image.png"],
         pills: [{ "Link": "https://home9634.github.io/Fern-Scribbler-Wiki/#/" }],
         technologies: ["HTML", "CSS", "JavaScript", "React", "Tailwind"],
     },
@@ -43,8 +44,8 @@ const projects = [
     },
     {
         title: "EcoBus Routes",
-        description: "Using LTA's Bus Arrival API and the Flutter framework, I desigbed a bus app for the module Mobile Application Development. It has the base for recording journeys to earn points to redeem vouchers, promoting sustainabilty. All information about the user is stored in Firebase. However, there are no actual vouchers in place.",
-        images: ["placeholder4.jpg", "placeholder5.jpg"],
+        description: "Using LTA's Bus Arrival API and the Flutter framework, I designed a bus app for the module Mobile Application Development. It has the base for recording journeys to earn points to redeem vouchers, promoting sustainabilty. All information about the user is stored in Firebase. However, there are no actual vouchers in place.",
+        images: ["https://i.ibb.co/BV5kdmg/Project-Logo-Cropped.png", "https://i.ibb.co/YyRRCGd/Screenshot-2024-07-29-044037.png", "https://i.ibb.co/vwh6kJM/Screenshot-2024-07-29-044700.png", "https://i.ibb.co/WH1J4gm/Screenshot-2024-07-29-050704.png", "https://i.ibb.co/2v2xQ6B/Screenshot-2024-07-29-042842.png", "https://i.ibb.co/426YXr0/Screenshot-2024-07-29-043257.png"],
         github: "#",
         demo: "#",
         technologies: ["Flutter", "Dart", "LTA API", "Firebase"]
@@ -52,21 +53,34 @@ const projects = [
     {
         title: "Sleep Disorder Detector",
         description: "For Machine Learning For Developers module, I cleaned a dataset and trained a model using scikit-learn, in order to predict different sleep disorders.",
-        images: [],
+        images: ["https://i.ibb.co/0XKsBVH/image.png"],
         github: "https://github.com/Home9634/sleep-detection-app-mldp",
         pills: [{ "Link": "https://blank-app-e829zcaidsg.streamlit.app/" }],
         technologies: ["Streamlit", "Python", "scikit-learn"],
     },
+    {
+        title: "Meeting Scheduler",
+        description: "A robot built using UIPath that helps schedules meetings and send emails with the automatically created meeting links to all participants.",
+        images: [],
+        demo: "",
+        technologies: ["UIPath"]
+    }
     // Add more projects here
 ];
 
+window.scrollTo(0, 0)
+
 // Component for skill card
 function createSkillCard(skill, index) {
-    console.log(Math.floor(index / 2))
-    let x = Math.floor(index / 2) * 200
-    let y = index % 2 == 0 ? 0 : 150
+    let maxWidth = window.innerWidth * 4/5
+    let cardWidth = Math.min(Math.round(maxWidth / skills.length) * 2, 200) 
+    console.log(`Card Width: ${cardWidth}`)
+    let cols = Math.round(maxWidth / cardWidth)
+    console.log(`Columns: ${cols}`)
+    let x = Math.floor(index / (cols * 2)) * cardWidth
+    let y = index % cols == 0 ? 0 : cardWidth * 3/4
     return `
-        <div class="skill-card absolute w-[200px] h-[200px] bg-gray-100 dark:bg-gray-600 dark:text-white rounded shadow-lg overflow-hidden" style="transform:translate(${x}px, ${y}px)" data-x="${x}" data-y="${y}">
+        <div class="skill-card absolute w-[${cardWidth}px] h-[${cardWidth}px] bg-gray-100 dark:bg-gray-600 dark:text-white rounded shadow-lg overflow-hidden" style="transform:translate(${x}px, ${y}px)" data-x="${x}" data-y="${y}">
             <div class="bg-gray-200 dark:bg-gray-700 h-6"></div>
             <div class="p-2">
                 <h3 class="font-bold mb-1 text-lg text-gray-800 dark:text-gray-200">${skill.title}</h3>
@@ -171,8 +185,6 @@ closeViewer.addEventListener('click', () => {
     imageViewer.classList.add('hidden');
 });
 
-window.scrollTo(0, 0)
-
 // Theme toggle
 const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
@@ -250,6 +262,170 @@ requestAnimationFrame(() => {
 
 // Recalculate positions on window resize
 window.addEventListener('resize', initDraggable);
+
+// Achievement data
+const achievements = [
+    { id: 'visit', name: 'Welcome!', description: 'Visit this site', icon: '👋' },
+    { id: 'dark_mode', name: 'Rise And Shine', description: 'Toggle light mode', icon: '☀️' },
+    { id: 'all_sections', name: 'Explorer', description: 'View all sections of the portfolio', icon: '🔍' },
+    { id: 'drag_skill', name: 'Skill Mover', description: 'Drag a skill card', icon: '✋' },
+    { id: 'view_project', name: 'Project Curious', description: 'View a project in full screen', icon: '🖼️' },
+    { id: 'contact', name: 'Let\'s Connect', description: 'Click on a contact link', icon: '📞' },
+    { id: ''}
+];
+
+// Initialize achievements in local storage
+function initAchievements() {
+    const storedAchievements = localStorage.getItem('portfolioAchievements');
+    if (!storedAchievements) {
+        const initialAchievements = achievements.reduce((acc, achievement) => {
+            acc[achievement.id] = false;
+            return acc;
+        }, {});
+        localStorage.setItem('portfolioAchievements', JSON.stringify(initialAchievements));
+    }
+}
+
+function updateAchievementDisplay() {
+    const achievementsList = document.getElementById('achievements-list');
+    const storedAchievements = JSON.parse(localStorage.getItem('portfolioAchievements'));
+
+    achievementsList.innerHTML = achievements.map(achievement => `
+        <div class="achievement ${storedAchievements[achievement.id] ? 'unlocked' : ''}" data-id="${achievement.id}">
+            <span class="text-2xl mr-2">${achievement.icon}</span>
+            <strong>${achievement.name}</strong>
+            <p>${achievement.description}</p>
+        </div>
+    `).join('');
+
+    // Add click listener to toggle achievement state (for testing purposes)
+    achievementsList.querySelectorAll('.achievement').forEach(achievementEl => {
+        // achievementEl.addEventListener('click', () => {
+        //     const id = achievementEl.dataset.id;
+        //     if (storedAchievements[id]) {
+        //         revokeAchievement(id);
+        //     } else {
+        //         unlockAchievement(id);
+        //     }
+        // });
+    });
+}
+
+function unlockAchievement(id) {
+    const storedAchievements = JSON.parse(localStorage.getItem('portfolioAchievements'));
+    if (!storedAchievements[id]) {
+        storedAchievements[id] = true;
+        localStorage.setItem('portfolioAchievements', JSON.stringify(storedAchievements));
+
+        const achievementEl = document.querySelector(`.achievement[data-id="${id}"]`);
+        achievementEl.classList.add('unlocked');
+
+        showAchievementNotification(id);
+    }
+}
+
+function revokeAchievement(id) {
+    const storedAchievements = JSON.parse(localStorage.getItem('portfolioAchievements'));
+    console.log(storedAchievements[id])
+    if (storedAchievements[id]) {
+        storedAchievements[id] = false;
+        localStorage.setItem('portfolioAchievements', JSON.stringify(storedAchievements));
+
+        const achievementEl = document.querySelector(`.achievement[data-id="${id}"]`);
+        achievementEl.classList.remove('unlocked');
+    }
+}
+
+// Show a notification when an achievement is unlocked
+function showAchievementNotification(id) {
+    const achievement = achievements.find(a => a.id === id);
+    const notification = document.createElement('div');
+    notification.zIndex = 1001
+    notification.className = 'fixed bottom-4 right-4 bg-yellow-400 text-black p-4 rounded-lg shadow-lg z-50';
+    notification.innerHTML = `
+        <strong>Achievement Unlocked!</strong>
+        <p>${achievement.name}: ${achievement.description}</p>
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
+}
+
+// Toggle the achievements menu
+function toggleAchievementsMenu() {
+    const menu = document.getElementById('achievements-menu');
+    menu.classList.toggle('translate-x-full');
+}
+
+function resetAchievements() {
+    const currentAchievements = JSON.parse(localStorage.getItem("portfolioAchievements"))
+    Object.keys(currentAchievements).forEach((key, index) => {
+        if (currentAchievements[key]) {
+            setTimeout(() => {
+                console.log("Hello")
+                revokeAchievement(key)
+                if (index == currentAchievements.length - 1) {
+                    const initialAchievements = achievements.reduce((acc, achievement) => {
+                        acc[achievement.id] = false;
+                        return acc;
+                    }, {});
+                    localStorage.setItem('portfolioAchievements', JSON.stringify(initialAchievements));
+                }
+            }, 200 * (index + 1))
+        }
+    })
+    
+    //updateAchievementDisplay();
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    initAchievements();
+    updateAchievementDisplay();
+
+    // Unlock 'visit' achievement on load
+    unlockAchievement('visit');
+
+    // Toggle achievements menu
+    document.getElementById('achievements-button').addEventListener('click', toggleAchievementsMenu);
+    document.getElementById('achievements-menu-close').addEventListener('click', toggleAchievementsMenu)
+    document.getElementById('achievements-menu-reset').addEventListener('click', resetAchievements)
+
+    // Dark mode achievement
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+        if (localStorage.getItem("theme") == 'light')
+        unlockAchievement('dark_mode')
+    });
+
+    // Explorer achievement (simplified version, you might want to use Intersection Observer for better performance)
+    const sections = ['about', 'skills', 'projects', 'contact'];
+    let viewedSections = new Set();
+    window.addEventListener('scroll', () => {
+        sections.forEach(section => {
+            const el = document.getElementById(section);
+            if (el.getBoundingClientRect().top < window.innerHeight && el.getBoundingClientRect().bottom > 0) {
+                viewedSections.add(section);
+                if (viewedSections.size === sections.length) {
+                    unlockAchievement('all_sections');
+                }
+            }
+        });
+    });
+
+    // Skill Mover achievement
+    document.querySelectorAll('.skill-card').forEach(card => {
+        card.addEventListener('mousedown', () => unlockAchievement('drag_skill'));
+    });
+
+    // Project Curious achievement
+    document.querySelectorAll('.carousel-0, .carousel-1, .carousel-2, .carousel-3, .carousel-4').forEach(carousel => {
+        carousel.addEventListener('click', () => unlockAchievement('view_project'));
+    });
+
+    // Let's Connect achievement
+    document.querySelectorAll('#contact a').forEach(link => {
+        link.addEventListener('click', () => unlockAchievement('contact'));
+    });
+});
 
 // GSAP animations
 gsap.registerPlugin(ScrollTrigger);
