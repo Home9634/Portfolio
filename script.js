@@ -72,13 +72,15 @@ window.scrollTo(0, 0)
 
 // Component for skill card
 function createSkillCard(skill, index) {
-    let maxWidth = window.innerWidth * 4/5
-    let cardWidth = Math.min(Math.round(maxWidth / skills.length) * 2, 200) 
-    console.log(`Card Width: ${cardWidth}`)
-    let cols = Math.round(maxWidth / cardWidth)
-    console.log(`Columns: ${cols}`)
+    // let maxWidth = window.innerWidth * 4/5
+    // let cardWidth = Math.min(Math.round(maxWidth / skills.length) * 2, 200) 
+    // console.log(`Card Width: ${cardWidth}`)
+    // let cols = Math.round(maxWidth / cardWidth)
+    // console.log(`Columns: ${cols}`)
+    let cardWidth = 200
+    let cols = 1
     let x = Math.floor(index / (cols * 2)) * cardWidth
-    let y = index % cols == 0 ? 0 : cardWidth * 3/4
+    let y = index % 2 == 0 ? 0 : cardWidth * 3/4
     return `
         <div class="skill-card absolute w-[${cardWidth}px] h-[${cardWidth}px] bg-gray-100 dark:bg-gray-600 dark:text-white rounded shadow-lg overflow-hidden" style="transform:translate(${x}px, ${y}px)" data-x="${x}" data-y="${y}">
             <div class="bg-gray-200 dark:bg-gray-700 h-6"></div>
