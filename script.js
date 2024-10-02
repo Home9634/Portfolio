@@ -61,12 +61,20 @@ const projects = [
     {
         title: "Meeting Scheduler",
         description: "A robot built using UIPath that helps schedules meetings and send emails with the automatically created meeting links to all participants.",
-        images: [],
+        images: ["https://i.ibb.co/kgGqymM/Screenshot-2024-10-02-121534.png", "https://i.ibb.co/bNn6pk3/Screenshot-2024-10-02-121602.png"],
         demo: "",
         technologies: ["UIPath"]
     }
     // Add more projects here
 ];
+
+const certs = [
+    "GovTech GeekOut 2024 - Best Technical Implementation",
+    "L1 Knime Certification",
+    "Edusave Certificate Of Academic Achievement",
+    "Legacy JavaScript Algorithms and Data Structures: Developer Certification (300 hours)",
+    "The Queen's Commonwealth Essay Competition 2021 - Bronze Award"
+]
 
 window.scrollTo(0, 0)
 
@@ -273,7 +281,6 @@ const achievements = [
     { id: 'drag_skill', name: 'Skill Mover', description: 'Drag a skill card', icon: '✋' },
     { id: 'view_project', name: 'Project Curious', description: 'View a project in full screen', icon: '🖼️' },
     { id: 'contact', name: 'Let\'s Connect', description: 'Click on a contact link', icon: '📞' },
-    { id: ''}
 ];
 
 // Initialize achievements in local storage
