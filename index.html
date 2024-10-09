@@ -119,6 +119,10 @@
 
         <section id="projects" class="mb-12">
             <h2 class="text-3xl font-serif font-bold mb-4 text-blue-600 dark:text-blue-100">Projects</h2>
+            <div class="mb-3">
+                <button class="text-xl font-bold text-blue-600 dark:text-blue-100 border-2 border-gray-900 dark:border-gray-100 rounded-md bg-gray-100 dark:bg-gray-600 p-2 hover:dark:bg-gray-700 hover:dark:blue-200 hover:bg-gray-200 hover:text-blue-700" onclick="toggleProjectShow(true)">Programming</button>
+                <button class="text-xl font-bold text-green-600 dark:text-green-100 border-2 border-gray-900 dark:border-gray-100 rounded-md bg-gray-100 dark:bg-gray-600 p-2 hover:dark:bg-gray-700 hover:dark:green-200 hover:bg-gray-200 hover:text-green-700" onclick="toggleProjectShow(false)">Writing</button>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
                 <!-- Projects will be dynamically added here -->
             </div>
